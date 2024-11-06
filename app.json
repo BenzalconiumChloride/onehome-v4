@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "onerhome-v3",
-    "slug": "onerhome-v3",
+    "name": "onehome-v3",
+    "slug": "onehome-v3",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/silverlogo.png",
+    "scheme": "onehome",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/silverlogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/silverlogo.png",
         "backgroundColor": "#ffffff"
       }
     },
