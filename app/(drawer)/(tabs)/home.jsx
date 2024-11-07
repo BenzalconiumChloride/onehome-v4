@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Svg, Defs, LinearGradient, Stop, Rect } from "react-native-svg";
-import { icons, images } from "../../constants";
+import { icons, images } from "../../../constants";
 
 const Home = () => {
   const [showBalance, setShowBalance] = useState(true); // State to show/hide balance

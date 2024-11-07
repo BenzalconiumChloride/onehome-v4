@@ -2,7 +2,10 @@ import { View, Text, Image, StyleSheet, SafeAreaView, ScrollView } from 'react-n
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { LayoutAnimation } from 'react-native';
-import { icons, images } from '../../constants';
+import { icons, images } from '../../../constants';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 const TabIcon = ({ icon, color, name, focused }) => {
   LayoutAnimation.configureNext({
@@ -18,13 +21,14 @@ const TabIcon = ({ icon, color, name, focused }) => {
   });
 
   return (
-    <View style={[styles.tabContainer, focused && styles.focusedTab]}>
+    <View style={[styles.tabContainer, focused && styles.focusedTab]} >
       {focused && (
         <>
           <View style={styles.rightHighlight} />
           <View style={styles.leftHighlight} />
         </>
       )}
+      
       <Image 
         source={icon}
         resizeMode="contain"
@@ -38,69 +42,100 @@ const TabIcon = ({ icon, color, name, focused }) => {
   );
 };
 
+
+
 const TabsLayout = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+
+
         <Tabs
           screenOptions={{
+            headerShown: false,
             tabBarShowLabel: false,
-            tabBarActiveTintColor: '#545454',
-            tabBarInactiveTintColor: '#bdbdbd',
+            tabBarActiveTintColor: "#545454",
+            tabBarInactiveTintColor: "#bdbdbd",
             tabBarStyle: {
-              backgroundColor: 'linear-gradient(90deg, rgba(2,44,122,1) 0%, rgba(48,48,228,1) 100%)',
+              backgroundColor:
+                "linear-gradient(90deg, rgba(2,44,122,1) 0%, rgba(48,48,228,1) 100%)",
               borderTopWidth: 2,
               height: 60,
             },
           }}
         >
-          <Tabs.Screen 
-            name="home" 
+          <Tabs.Screen
+            name="home"
             options={{
-              title: 'Home',
+              title: "Home",
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
-                <TabIcon icon={icons.home} color={color} name="Home" focused={focused} />
+                <TabIcon
+                  icon={icons.home}
+                  color={color}
+                  name="Home"
+                  focused={focused}
+                />
               ),
             }}
           />
-          <Tabs.Screen 
-            name="history" 
+          <Tabs.Screen
+            name="history"
             options={{
-              title: 'History',
+              title: "History",
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
-                <TabIcon icon={icons.history} color={color} name="History" focused={focused} />
+                <TabIcon
+                  icon={icons.history}
+                  color={color}
+                  name="History"
+                  focused={focused}
+                />
               ),
             }}
           />
-          <Tabs.Screen 
-            name="services" 
+          <Tabs.Screen
+            name="services"
             options={{
-              title: 'Services',
+              title: "Services",
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
-                <TabIcon icon={icons.mainLogo} color={color} name="Services" focused={focused} />
+                <TabIcon
+                  icon={icons.mainLogo}
+                  color={color}
+                  name="Services"
+                  focused={focused}
+                />
               ),
             }}
           />
-          <Tabs.Screen 
-            name="updates" 
+          <Tabs.Screen
+            name="updates"
             options={{
-              title: 'Updates',
+              title: "Updates",
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
-                <TabIcon icon={icons.notif} color={color} name="Updates" focused={focused} />
+                <TabIcon
+                  icon={icons.notif}
+                  color={color}
+                  name="Updates"
+                  focused={focused}
+                />
               ),
             }}
           />
-          <Tabs.Screen 
-            name="profile" 
+          <Tabs.Screen
+            name="profile"
             options={{
-              title: 'Profile',
+              title: "Profile",
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
-                <TabIcon icon={icons.profile} color={color} name="Profile" focused={focused} />
+                <TabIcon
+                  icon={icons.profile}
+                  color={color}
+                  name="Profile"
+                  focused={focused}
+                />
               ),
             }}
           />

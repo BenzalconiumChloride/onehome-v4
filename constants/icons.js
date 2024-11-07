@@ -16,6 +16,9 @@ import history from "../assets/icons/history.png";
 import notif from "../assets/icons/notif.png";
 import scan from "../assets/icons/scan.png";
 import bluelogoh from "../assets/icons/bluelogoh.png";
+import question from "../assets/icons/question.png";
+import info from "../assets/icons/info.png";
+import contact from "../assets/icons/phone-book.png";
 
 export default {
   play,
@@ -36,4 +39,7 @@ export default {
   notif,
   scan,
   bluelogoh,
+  question,
+  info,
+  contact,
 };

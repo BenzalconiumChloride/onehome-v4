@@ -58,13 +58,9 @@ export default function App() {
             />
             <SignInFb />
 
-            <Text
-              className="mt-10 font-bold text-lg text-center"
-              onPress={() => router.push("/home")} // Navigate to the home screen
-              style={{ color: "#0f89e7", marginTop: 10 }}
-            >
-              Home {"\n"}
-            </Text>
+            <Link href="./(drawer)/(tabs)/home">
+              <Text>{"\n"} Testing Home</Text>
+            </Link>
 
             {/* Add two authentication options for sign-up: one for clients and one for service providers */}
           </View>
