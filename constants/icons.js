@@ -19,9 +19,11 @@ import bluelogoh from "../assets/icons/bluelogoh.png";
 import question from "../assets/icons/question.png";
 import info from "../assets/icons/info.png";
 import contact from "../assets/icons/phone-book.png";
+import edit from "../assets/icons/edit.png";
 
 export default {
   play,
+  edit,
   bookmark,
   home,
   plus,
