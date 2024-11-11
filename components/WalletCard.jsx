@@ -66,7 +66,7 @@ const WalletCard = () => {
             <View style={styles.textContainer}>
               <Text style={styles.cardText}>My Wallet</Text>
               <Text style={styles.cardBalance}>
-                {showBalance ? "₱30,000" : "********"}
+                {showBalance ? "₱30,000" : "₱••••••"}
               </Text>
             </View>
 

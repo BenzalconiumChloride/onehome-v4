@@ -8,6 +8,7 @@ import "../global.css";
 import ClientBtn from '../components/ClientBtn';
 import SerProBtn from '../components/SerProBtn';
 import SignInFb from '../components/signInFb';
+import GoogleSignIn from '../components/google-signIn';
 
 
 
@@ -56,7 +57,12 @@ export default function App() {
                 marginBottom: 20,
               }}
             />
-            <SignInFb />
+
+            <View className="mb-5">
+              <SignInFb />
+            </View>
+            
+            <GoogleSignIn />
 
             <Link href="./(drawer)/(tabs)/home">
               <Text>{"\n"} Testing Home</Text>
