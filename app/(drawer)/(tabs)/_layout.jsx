@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -5,40 +6,90 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
-  KeyboardAvoidingView,
-  Platform,
   Keyboard,
+  TouchableOpacity,
+  Animated,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import { Tabs } from "expo-router";
-import { LayoutAnimation } from "react-native";
 import { icons } from "../../../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Link } from "expo-router";
 
 const Tab = createBottomTabNavigator();
 
-const TabIcon = ({ icon, color, name, focused }) => {
-  LayoutAnimation.configureNext({
-    duration: 500, // Animation duration
-    create: { type: "linear", property: "opacity" },
-    update: { type: "linear", property: "opacity" },
-  });
-
+const TabIcon = ({ iconFilled, iconOutlined, color, name, focused }) => {
   return (
     <View style={[styles.tabContainer, focused && styles.focusedTab]}>
       {focused && <View style={styles.highlightCircle} />}
       <Image
-        source={icon}
+        source={focused ? iconFilled : iconOutlined}
         resizeMode="contain"
         style={[
           styles.icon,
-          { tintColor: focused ? color : "#fff" }, // White when inactive
+          { tintColor: focused ? color : "#fff" },
           focused && styles.focusedIcon,
         ]}
       />
-      <Text style={[styles.label, focused && styles.focusedLabel, { color }]}>
-        {name}
-      </Text>
+      <Text style={[styles.label, focused && styles.focusedLabel]}>{name}</Text>
+    </View>
+  );
+};
+
+const ServicesTabScreen = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [animation] = useState(new Animated.Value(0)); // For animating menu
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+
+    // Animate the menu items
+    Animated.timing(animation, {
+      toValue: menuVisible ? 0 : 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const menuStyle = {
+    transform: [
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -270], // Adjust this value for how far the options should appear
+        }),
+      },
+      
+    ],
+  };
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={toggleMenu}>
+          
+          <View style={styles.circularBackground}>
+            <Image
+              source={menuVisible ? icons.mainLogo : icons.mainLogo}
+              style={[styles.buttonIcon, { width: 26, height: 26 }]}
+            />
+          </View>
+        
+      </TouchableOpacity>
+
+      <Animated.View style={[styles.menu, menuStyle]}>
+        {menuVisible && (
+          <>
+            <TouchableOpacity style={styles.option1}>
+              <Text style={styles.optionText}><Link href="/services">Option A</Link></Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.option2}>
+              <Text style={styles.optionText}>Option B</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.option3}>
+              <Text style={styles.optionText}>Option C</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Animated.View>
     </View>
   );
 };
@@ -68,101 +119,172 @@ const TabsLayout = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Tabs
-            screenOptions={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarActiveTintColor: "#000",
-              tabBarInactiveTintColor: "#fff",
-              tabBarStyle: [
-                styles.tabBarStyle,
-                { display: isKeyboardVisible ? "none" : "flex" },
-              ],
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#000",
+            tabBarInactiveTintColor: "#fff",
+            tabBarStyle: [
+              styles.tabBarStyle,
+              isKeyboardVisible && { display: "none" }, // Hide tab bar when keyboard is visible
+            ],
+          }}
+        >
+          <Tabs.Screen
+            name="home"
+            options={{
+              title: "Home",
+              tabBarIcon: ({ color, focused }) => (
+                <TabIcon
+                  iconFilled={icons.home}
+                  iconOutlined={icons.home1}
+                  color={color}
+                  name="Home"
+                  focused={focused}
+                />
+              ),
             }}
-          >
-            <Tabs.Screen
-              name="home"
-              options={{
-                title: "Home",
-                tabBarIcon: ({ color, focused }) => (
-                  <TabIcon
-                    icon={icons.home}
-                    color={color}
-                    name="Home"
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="history"
-              options={{
-                title: "History",
-                tabBarIcon: ({ color, focused }) => (
-                  <TabIcon
-                    icon={icons.history}
-                    color={color}
-                    name="History"
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="services"
-              options={{
-                title: "Services",
-                tabBarIcon: ({ color, focused }) => (
-                  <TabIcon
-                    icon={icons.mainLogo}
-                    color={color}
-                    name="Services"
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="updates"
-              options={{
-                title: "Updates",
-                tabBarIcon: ({ color, focused }) => (
-                  <TabIcon
-                    icon={icons.notif}
-                    color={color}
-                    name="Updates"
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="profile"
-              options={{
-                title: "Profile",
-                tabBarIcon: ({ color, focused }) => (
-                  <TabIcon
-                    icon={icons.profile}
-                    color={color}
-                    name="Profile"
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-          </Tabs>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          />
+          <Tabs.Screen
+            name="history"
+            options={{
+              title: "History",
+              tabBarIcon: ({ color, focused }) => (
+                <TabIcon
+                  iconFilled={icons.history}
+                  iconOutlined={icons.history1}
+                  color={color}
+                  name="History"
+                  focused={focused}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="services"
+            options={{
+              title: "Services",
+              tabBarButton: () => <ServicesTabScreen />, // Custom button for Services tab
+            }}
+          />
+          <Tabs.Screen
+            name="updates"
+            options={{
+              title: "Updates",
+              tabBarIcon: ({ color, focused }) => (
+                <TabIcon
+                  iconFilled={icons.notif}
+                  iconOutlined={icons.notif1}
+                  color={color}
+                  name="Updates"
+                  focused={focused}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: "Profile",
+              tabBarIcon: ({ color, focused }) => (
+                <TabIcon
+                  iconFilled={icons.profile}
+                  iconOutlined={icons.profile1}
+                  color={color}
+                  name="Profile"
+                  focused={focused}
+                />
+              ),
+            }}
+          />
+        </Tabs>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#fff",
+    width: 65,
+    height: 60,
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    justifyContent: "center",
+    alignItems: "center",
+    top: -5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 30,
+    fontWeight: "700",
+    color: "#1e1e1e",
+  },
+  menu: {
+    position: "absolute",
+    top: 68, // Adjust position based on your layout
+    alignItems: "center",
+  },
+  // options
+  option1: {
+    backgroundColor: "#022c5c",
+    borderColor: "#e0e0f6",
+    borderWidth: 2,
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    top: 140,
+    right: 60,
+    transitionDelay: 100,
+  },
+
+  option2: {
+    backgroundColor: "#022c5c",
+    borderColor: "#e0e0f6",
+    borderWidth: 2,
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    top: 40,
+    transitionDelay: 200,
+  },
+
+  option3: {
+    backgroundColor: "#022c5c",
+    borderColor: "#e0e0f6",
+    borderWidth: 2,
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    left: 60,
+    top: 30,
+    transitionDelay: 300,
+  },
+  // end of options
+  optionText: {
+    color: "#fff",
+    fontWeight: "100",
+  },
   tabContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -173,34 +295,28 @@ const styles = StyleSheet.create({
   },
   focusedTab: {
     position: "absolute",
-    top: -20,
-    backgroundColor: "#fbf9f9",
     width: 60,
     height: 60,
     borderRadius: 35,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
   },
   icon: {
     width: 24,
     height: 24,
   },
   focusedIcon: {
-    tintColor: "#022c5c",
-    width: 20,
-    height: 20,
+    tintColor: "#fff",
+    width: 24,
+    height: 24,
   },
   label: {
     fontSize: 12,
+    color: "#fff",
   },
   focusedLabel: {
     fontWeight: "600",
-    color: "#000",
-    marginTop: 5,
+    color: "#fff",
   },
   tabBarStyle: {
     backgroundColor: "#022c5c",
@@ -211,6 +327,17 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+
+  circularBackground: {
+    position: "absolute",
+    backgroundColor: "#022c5c",
+    borderRadius: 35,
+    height: 50,
+    width: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    top: 2,
   },
 });
 
