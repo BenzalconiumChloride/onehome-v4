@@ -16,18 +16,20 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./assets/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/silverlogo.png",
         "backgroundColor": "#ffffff",
-        "package": "com.trident.onehome"
-      }
+        "package": "com.benzalconium.onehomev3"
+      },
+      "package": "com.benzalconium.onehomev3"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-camera",
       "expo-router"
     ],
     "experiments": {
