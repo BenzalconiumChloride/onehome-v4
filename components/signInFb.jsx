@@ -47,18 +47,17 @@ const SignInFb = () => {
   const passwordsMatch = form.password === form.password1;
 
   return (
-   
-        <View style={styles.submitContainer}>
-          <TouchableOpacity
-            style={[styles.button, styles.facebookButton]}
-            onPress={() => {
-              promptAsync();
-            }}
-          >
-            <MaterialCommunityIcons name="facebook" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-
+    <View style={styles.submitContainer}>
+      <TouchableOpacity
+        style={[styles.button, styles.facebookButton, { padding: 10 }]}
+        onPress={() => {
+          promptAsync();
+        }}
+      >
+        <MaterialCommunityIcons name="facebook" size={24} color="#FFFFFF" />
+        <Text style={{ color: "white" }}>Sign In with Facebook</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

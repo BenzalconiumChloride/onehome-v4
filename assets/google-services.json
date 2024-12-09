@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "373780492663",
+    "project_id": "onehome-5e9a8",
+    "storage_bucket": "onehome-5e9a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373780492663:android:aa7dcbfbfa73ba949db172",
+        "android_client_info": {
+          "package_name": "com.benzalconium.onehomev3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYBgFifzbkOchBQRvUxYDw1naoCqwmN3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

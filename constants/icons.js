@@ -10,15 +10,28 @@ import rightArrow from "../assets/icons/right-arrow.png";
 import logout from "../assets/icons/logout.png";
 import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
-import play from "../assets/icons/play.png";
 import mainLogo from "../assets/icons/mainLogo.png";
 import history from "../assets/icons/history.png";
 import notif from "../assets/icons/notif.png";
 import scan from "../assets/icons/scan.png";
 import bluelogoh from "../assets/icons/bluelogoh.png";
+import question from "../assets/icons/question.png";
+import info from "../assets/icons/info.png";
+import contact from "../assets/icons/phone-book.png";
+import edit from "../assets/icons/edit.png";
+import google from "../assets/icons/google.png";
+import history1 from "../assets/icons/history1.png";
+import home1 from "../assets/icons/home1.png";
+import notif1 from "../assets/icons/notif1.png";
+import profile1 from "../assets/icons/profile1.png";
 
 export default {
-  play,
+  history1,
+  home1,
+  notif1,
+  profile1,
+  google,
+  edit,
   bookmark,
   home,
   plus,
@@ -36,4 +49,7 @@ export default {
   notif,
   scan,
   bluelogoh,
+  question,
+  info,
+  contact,
 };
